@@ -19,7 +19,7 @@ def transferir():
     idContaOrigem = selecionarIdConta(contaOrigem, baseDadosBanco)
     idContaDestino = selecionarIdConta(contaDestino, baseDadosBanco)
 
-    time.sleep(3)
+    #time.sleep(3)
     if baseDadosBanco[idContaOrigem].saldo < valor:
         print('ERROOOO, o saldo da conta {} é insuficiente para realizar a transfêrencia'.format(baseDadosBanco[idContaOrigem].numero))
     else:
@@ -30,13 +30,15 @@ def transferir():
         baseDadosBanco[idContaDestino].saldo = baseDadosBanco[idContaDestino].saldo + valor       
         print("Foram transferidos R$ {}  da conta {} para a conta {} O saldo da conta {} agora é de {} reais.".format(valor,contaOrigem,contaDestino,contaOrigem, baseDadosBanco[idContaOrigem].saldo))
 
+print("Aguardando thread")
+time.sleep(3)
+
 for indice in range(100):
     t = threading.Thread(target=transferir)
     t.start()
 while t.isAlive():
-    print("Aguardando thread")
-    #transferir()
-    time.sleep(3)
+    print('')
+    
  
 print ("Thread morreu")
 print("Finalizando programa")

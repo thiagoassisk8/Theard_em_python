@@ -2,6 +2,7 @@
 from base_dados import *  
 import time,os
 import threading
+import logging
 
 def selecionarIdConta (numero, baseDadosBanco): 
     for i in range(len(baseDadosBanco)):
@@ -10,8 +11,8 @@ def selecionarIdConta (numero, baseDadosBanco):
             break
     return idConta
 
-contaOrigem = input('Digite a conta origem da transferencia \n')
-contaDestino = input('Digite a conta destino da transferencia \n')    
+contaOrigem = '3450-1'
+contaDestino = '4570-1'
 
 def transferir():
     valor = 10
@@ -28,17 +29,16 @@ def transferir():
         #Adiciona o valor da transfêrencia na conta destino
         baseDadosBanco[idContaDestino].saldo = baseDadosBanco[idContaDestino].saldo + valor       
         print("Foram transferidos R$ {}  da conta {} para a conta {} O saldo da conta {} agora é de {} reais.".format(valor,contaOrigem,contaDestino,contaOrigem, baseDadosBanco[idContaOrigem].saldo))
-
+        
 print("Aguardando thread")
 time.sleep(3)
 
-for indice in range(100):
+for x in range(100):
     t = threading.Thread(target=transferir)
     t.start()
     while t.isAlive():    
-        print('-'*93 )
+        print('-'*107)
     
-
 print ("Thread morreu")
 print("Finalizando programa")
 
